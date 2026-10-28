@@ -134,5 +134,5 @@ function withGravatarQuickEditor(config, props = {}) {
 module.exports = createRunOncePlugin(
   withGravatarQuickEditor,
   'react-native-gravatar-quick-editor',
-  '0.1.0'
+  '0.1.1'
 );

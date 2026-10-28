@@ -9,6 +9,7 @@ ios/build
 ios/Pods
 **/.env
 **/.env.*
+.npmrc
 *.tgz
 .turbo
 .github

@@ -32,7 +32,7 @@ export default function App() {
     try {
       const result = await openQuickEditor({
         email,
-        scope: ['avatars', 'about'],
+        scope: ['avatars'],
         oauth:
           clientId.trim().length > 0
             ? { clientId: clientId.trim(), redirectUri: redirectUri.trim() }
