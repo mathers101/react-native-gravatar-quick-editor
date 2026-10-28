@@ -1,0 +1,54 @@
+ext.GravatarQuickEditor = [
+  minSdkVersion: 24,
+  compileSdkVersion: 36
+]
+
+ext.getExtOrDefault = { prop ->
+  if (rootProject.ext.has(prop)) {
+    return rootProject.ext.get(prop)
+  }
+
+  return GravatarQuickEditor[prop]
+}
+
+apply plugin: "com.android.library"
+
+if (project.extensions.findByName("kotlin") == null) {
+  apply plugin: "kotlin-android"
+}
+
+apply plugin: "com.facebook.react"
+
+def gravatarSdkVersion = "2.5.1"
+
+repositories {
+  mavenCentral()
+  google()
+  maven {
+    url "https://a8c-libs.s3.amazonaws.com/android"
+  }
+  maven {
+    url "https://jitpack.io"
+    content {
+      includeModule("com.github.yalantis", "ucrop")
+    }
+  }
+}
+
+android {
+  namespace "com.gravatarquickeditor"
+
+  compileSdkVersion getExtOrDefault("compileSdkVersion")
+
+  defaultConfig {
+    minSdkVersion getExtOrDefault("minSdkVersion")
+  }
+}
+
+dependencies {
+  implementation "com.facebook.react:react-android"
+  implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2"
+  implementation "com.gravatar:gravatar:${gravatarSdkVersion}"
+  implementation "com.gravatar:gravatar-ui:${gravatarSdkVersion}"
+  implementation "com.gravatar:gravatar-quickeditor:${gravatarSdkVersion}"
+}
