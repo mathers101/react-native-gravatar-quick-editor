@@ -140,16 +140,14 @@ class GravatarQuickEditorModule(reactContext: ReactApplicationContext) :
   }
 
   private fun buildAuthentication(options: JSONObject): AuthenticationMethod {
-    val token = options.optString("authToken")
-    if (token.isNotEmpty()) {
+    // optString coerces JSON null to the string "null". opt + cast keeps a real null.
+    val token = options.opt("authToken") as? String
+    if (!token.isNullOrEmpty()) {
       return AuthenticationMethod.Bearer(token)
     }
-    return AuthenticationMethod.OAuth(
-      OAuthParams.Builder()
-        .setClientId(options.getString("clientId"))
-        .setRedirectUri(options.getString("redirectUri"))
-        .build(),
-    )
+    val clientId = options.getString("clientId")
+    val redirectUri = options.getString("redirectUri")
+    return AuthenticationMethod.OAuth(OAuthParams.Builder().setClientId(clientId).setRedirectUri(redirectUri).build())
   }
 
   private fun scopeOption(options: JSONObject): QuickEditorScopeOption {
