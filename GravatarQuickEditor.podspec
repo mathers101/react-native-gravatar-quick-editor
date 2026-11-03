@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
   s.authors      = package["author"]
 
   s.platforms    = { :ios => min_ios_version_supported }
-  s.source       = { :http => "https://registry.npmjs.org/react-native-gravatar-quick-editor/-/react-native-gravatar-quick-editor-#{s.version}.tgz" }
+  s.source       = { :git => package["repository"]["url"], :tag => "v#{s.version}" }
   s.swift_version = "5.0"
 
   s.source_files = "ios/**/*.{h,m,mm,swift,cpp}"

@@ -4,6 +4,7 @@ const {
   withProjectBuildGradle,
   createRunOncePlugin,
 } = require('@expo/config-plugins');
+const pkg = require('../package.json');
 
 const MAVEN_A8C = 'https://a8c-libs.s3.amazonaws.com/android';
 const MAVEN_JITPACK = `maven {
@@ -133,6 +134,6 @@ function withGravatarQuickEditor(config, props = {}) {
 
 module.exports = createRunOncePlugin(
   withGravatarQuickEditor,
-  'react-native-gravatar-quick-editor',
-  '0.1.1'
+  pkg.name,
+  pkg.version
 );
