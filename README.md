@@ -1,4 +1,4 @@
-# react-native-gravatar-quick-editor
+# @mathers101/react-native-gravatar-quick-editor
 
 React Native Turbo Module for the native Gravatar Quick Editor on Android and iOS. It opens the official editor for a user's avatar and About profile and returns an explicit success, cancellation, or error.
 
@@ -7,7 +7,7 @@ This is not a WebView. Android calls `GravatarQuickEditor.show` from `com.gravat
 ## Install
 
 ```sh
-npm install react-native-gravatar-quick-editor
+npm install @mathers101/react-native-gravatar-quick-editor
 ```
 
 Peer dependencies, developed against React 19.3.0 and React Native 0.88.0:
@@ -107,7 +107,7 @@ Autolinking does not know your redirect host, so Expo apps need setup beyond aut
 
 ```json
 [
-  "react-native-gravatar-quick-editor",
+  "@mathers101/react-native-gravatar-quick-editor",
   { "redirectUri": "https://yourhost.com/redirect-url" }
 ]
 ```
@@ -121,7 +121,7 @@ import {
   GravatarQuickEditorCore,
   openQuickEditor,
   QuickEditorError,
-} from 'react-native-gravatar-quick-editor';
+} from '@mathers101/react-native-gravatar-quick-editor';
 
 const editor = new GravatarQuickEditorCore({
   email: 'user@example.com',

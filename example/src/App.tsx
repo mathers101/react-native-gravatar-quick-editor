@@ -11,7 +11,7 @@ import {
   openQuickEditor,
   QuickEditorError,
   type QuickEditorSessionResult,
-} from 'react-native-gravatar-quick-editor';
+} from '@mathers101/react-native-gravatar-quick-editor';
 
 export default function App() {
   const [email, setEmail] = useState('');

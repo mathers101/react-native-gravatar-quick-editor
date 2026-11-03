@@ -2,7 +2,7 @@
   "compilerOptions": {
     "rootDir": ".",
     "paths": {
-      "react-native-gravatar-quick-editor": ["./src/index"]
+      "@mathers101/react-native-gravatar-quick-editor": ["./src/index"]
     },
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
