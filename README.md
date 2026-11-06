@@ -10,6 +10,8 @@ This is not a WebView. Android calls `GravatarQuickEditor.show` from `com.gravat
 npm install @mathers101/react-native-gravatar-quick-editor
 ```
 
+The package publishes to the public npm registry. After that publish, installs need no token, including on Expo EAS Build. Do not set `@mathers101:registry` to `https://npm.pkg.github.com` in the Expo app. GitHub’s npm registry requires a token for every download, so that line makes EAS return 401.
+
 Peer dependencies, developed against React 19.3.0 and React Native 0.88.0:
 
 | Package | Range |
@@ -196,7 +198,7 @@ npm run example -- android
 
 ## Publish
 
-The publish workflow runs on a `v*.*.*` tag. It uses `npm ci`, then lint, typecheck, and test, then `npm publish`. Put `NPM_TOKEN` in the GitHub Actions secret store. The workflow reads it as `secrets.NPM_TOKEN`. Do not commit a token, an `.npmrc` auth line, or a `.env` file.
+The publish workflow runs on a `v*.*.*` tag. It uses `npm ci`, then lint, typecheck, and test, then `npm publish --access public` to `https://registry.npmjs.org`. Put an npm access token in the `NPM_TOKEN` Actions secret. The workflow reads it as `secrets.NPM_TOKEN`. A GitHub personal access token cannot publish to the public npm registry. Do not commit a token, an `.npmrc` auth line, or a `.env` file.
 
 ```sh
 npm version 0.1.1
