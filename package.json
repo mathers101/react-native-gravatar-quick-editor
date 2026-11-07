@@ -1,6 +1,6 @@
 {
   "name": "@mathers101/react-native-gravatar-quick-editor",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Native Gravatar Quick Editor for React Native (Android and iOS)",
   "main": "./lib/module/index.js",
   "types": "./lib/typescript/src/index.d.ts",
