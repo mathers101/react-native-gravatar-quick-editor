@@ -195,22 +195,3 @@ npm install
 npm run example -- start
 npm run example -- android
 ```
-
-## Publish
-
-The publish workflow runs on a `v*.*.*` tag. It uses `npm ci`, then lint, typecheck, and test, then `npm publish --access public` to `https://registry.npmjs.org`. Put an npm access token in the `NPM_TOKEN` Actions secret. The workflow reads it as `secrets.NPM_TOKEN`. A GitHub personal access token cannot publish to the public npm registry. Do not commit a token, an `.npmrc` auth line, or a `.env` file.
-
-```sh
-npm version 0.1.1
-git push origin main --follow-tags
-```
-
-Tag the commit that contains the matching `package.json` version. `npm publish` runs `prepare`, which builds `lib/` with react-native-builder-bob.
-
-## Scripts
-
-```sh
-npm run lint
-npm run typecheck
-npm test
-```
