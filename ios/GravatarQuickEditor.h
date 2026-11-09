@@ -1,5 +1,5 @@
 #import <GravatarQuickEditorSpec/GravatarQuickEditorSpec.h>
 
-@interface GravatarQuickEditor : NSObject <NativeGravatarQuickEditorSpec>
+@interface GravatarQuickEditor : NativeGravatarQuickEditorSpecBase <NativeGravatarQuickEditorSpec>
 
 @end

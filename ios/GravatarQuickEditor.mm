@@ -10,7 +10,7 @@
 
 @implementation GravatarQuickEditor
 
-RCT_EXPORT_MODULE()
+RCT_EXPORT_MODULE(GravatarQuickEditor)
 
 - (void)open:(NSString *)optionsJson
      resolve:(RCTPromiseResolveBlock)resolve
@@ -64,11 +64,6 @@ RCT_EXPORT_MODULE()
     (const facebook::react::ObjCTurboModule::InitParams &)params
 {
   return std::make_shared<facebook::react::NativeGravatarQuickEditorSpecJSI>(params);
-}
-
-+ (NSString *)moduleName
-{
-  return @"GravatarQuickEditor";
 }
 
 @end
