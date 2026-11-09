@@ -17,7 +17,7 @@ describe('parseQuickEditorOptions', () => {
     expect(parsed.native).toMatchObject({
       email: 'User@Example.com',
       scope: 'avatars',
-      avatarContentLayout: 'horizontal',
+      avatarContentLayout: 'horizoutal',
       aboutFields: [],
       initialPage: 'avatars',
       colorScheme: 'system',
