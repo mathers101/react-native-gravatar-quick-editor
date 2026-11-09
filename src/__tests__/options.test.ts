@@ -1,3 +1,4 @@
+import { describe, expect, it } from '@jest/globals';
 import { QuickEditorError } from '../errors';
 import { parseQuickEditorOptions } from '../options';
 

@@ -1,55 +1,56 @@
-# Gravatar Quick Editor example
+# Welcome to your Expo app 👋
 
-Bare React Native app that opens the native Quick Editor and prints success, cancellation, or an error.
+This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 
-## Gravatar application setup
+## Get started
 
-The Quick Editor edits the user's Gravatar profile, so it needs OAuth. Create an application in the [Gravatar developer dashboard](https://gravatar.com/developers):
+1. Install dependencies
 
-1. Create an application and copy the client id.
-2. Add an **https** redirect URL. The Android and iOS SDKs use the implicit OAuth flow (`response_type=token`). The server rejects custom URL schemes.
-3. Create an API key if you want the optional `apiKey` field. The editor itself authorizes with OAuth or an access token, not the API key. The developer docs still mention `Gravatar.initialize`; Android SDK 2.5.1 exposes `Gravatar.apiKey` and `Gravatar.context` instead, and this example passes the key through to that API.
+   ```bash
+   npm install
+   ```
 
-This example is wired for:
+2. Start the app
 
-`https://gravatar-quick-editor.example/redirect-url`
+   ```bash
+   npx expo start
+   ```
 
-Replace that host with a domain you control before a real login can finish.
+In the output, you'll find options to open the app in a
 
-### Android
+- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
+- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
+- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
+- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
 
-`example/android/app/src/main/AndroidManifest.xml` merges `GravatarOAuthActivity` with an App Link intent filter for that host and path. Host `assetlinks.json` for the host, as described in [Android App Links](https://developer.android.com/training/app-links).
+You can start developing by editing the files inside the **src/app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
 
-The app also resolves the official SDK from:
+## Get a fresh project
 
-- `https://a8c-libs.s3.amazonaws.com/android`
-- `https://jitpack.io` (only `com.github.yalantis:ucrop`, required by `gravatar-ui`)
+When you're ready, run:
 
-### iOS
-
-`SceneDelegate` forwards universal links to `OAuthSession.shared.handleCallback`, which is what GravatarUI 3.4.0 documents. The sample entitlements file contains:
-
-`applinks:gravatar-quick-editor.example`
-
-Host an Apple App Site Association file for that domain and enable the Associated Domains capability on your signing team. The Podfile sets `USE_FRAMEWORKS=static` because `GravatarUI` is a Swift pod.
-
-Photo library and camera usage strings are in `Info.plist` because the avatar picker can take or choose a photo.
-
-## Run
-
-From the repository root:
-
-```sh
-npm install
-npm run example -- start
-npm run example -- android
+```bash
+npm run reset-project
 ```
 
-iOS (on macOS):
+This command will move the starter code to the **example** directory and create a blank **src/app** directory where you can start developing.
 
-```sh
-cd example/ios && bundle exec pod install && cd ../..
-npm run example -- ios
-```
+### Other setup steps
 
-Enter the email, client id, and the same https redirect URL, then tap **Edit Gravatar**. The screen shows the session status. A bearer token in the access-token field skips the OAuth screen. Do not commit client secrets or tokens.
+- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
+- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
+- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+
+## Learn more
+
+To learn more about developing your project with Expo, look at the following resources:
+
+- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
+- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+
+## Join the community
+
+Join our community of developers creating universal apps.
+
+- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
+- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.

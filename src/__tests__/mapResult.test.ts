@@ -1,3 +1,4 @@
+import { describe, expect, it } from '@jest/globals';
 import { mapProfile, mapSessionResult, mapUpdate } from '../mapResult';
 
 const profile = {
