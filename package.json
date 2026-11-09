@@ -41,7 +41,7 @@
     "example": "npm run --workspace react-native-gravatar-quick-editor-react-native-example",
     "clean": "del-cli android/build example/android/build example/android/app/build example/ios/build example/ios/Pods lib",
     "prepare": "bob build",
-    "typecheck": "tsc",
+    "typecheck": "tsc && tsc -p example --noEmit",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
     "test": "jest"
   },
