@@ -1,8 +1,8 @@
-import { ExpoConfig } from 'expo/config';
+import type { ExpoConfig } from 'expo/config';
 
 const REDIRECT_URI = process.env.EXPO_PUBLIC_GRAVATAR_REDIRECT_URI;
 
-module.exports = ({ config }: { config: ExpoConfig }) => {
+export default ({ config }: { config: ExpoConfig }) => {
   return {
     ...config,
     plugins: [
