@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "expo-example",
-    "slug": "expo-example",
-    "version": "1.0.0",
+    "name": "GravatarQuickEditorExample",
+    "slug": "gravatar-quick-editor-example",
+    "version": "0.0.1",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "expoexample",
+    "scheme": "gravatarquickeditorexample",
     "userInterfaceStyle": "automatic",
     "ios": {
       "icon": "./assets/expo.icon"
@@ -17,11 +17,15 @@
         "backgroundImage": "./assets/images/android-icon-background.png",
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.mathers101.gravatarquickeditorexample"
     },
     "web": {
       "output": "server",
       "favicon": "./assets/images/favicon.png"
+    },
+    "extra": {
+      "redirectUri": "https://gravatar.com"
     },
     "plugins": [
       "expo-router",

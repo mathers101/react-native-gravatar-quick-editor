@@ -38,7 +38,7 @@
     "LICENSE"
   ],
   "scripts": {
-    "example": "npm run --workspace react-native-gravatar-quick-editor-example",
+    "example": "npm run --workspace react-native-gravatar-quick-editor-react-native-example",
     "clean": "del-cli android/build example/android/build example/android/app/build example/ios/build example/ios/Pods lib",
     "prepare": "bob build",
     "typecheck": "tsc",
@@ -91,7 +91,8 @@
     }
   },
   "workspaces": [
-    "example"
+    "example",
+    "expo-example"
   ],
   "packageManager": "npm@10.9.9",
   "engines": {
