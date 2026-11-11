@@ -16,6 +16,7 @@ Pod::Spec.new do |s|
 
   s.source_files = "ios/**/*.{h,m,mm,swift,cpp}"
   s.private_header_files = "ios/**/*.h"
+  s.frameworks = "AuthenticationServices"
 
   # Last CocoaPods release of the official SDK. Quick Editor lives in GravatarUI.
   # Trunk dropped CocoaPods after 3.4.0; that tag is also the latest GitHub release.

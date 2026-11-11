@@ -1,4 +1,5 @@
 #import "GravatarQuickEditor.h"
+#import "GravatarOAuthAnchor.h"
 
 #import <React/RCTUtils.h>
 
@@ -16,6 +17,9 @@ RCT_EXPORT_MODULE(GravatarQuickEditor)
      resolve:(RCTPromiseResolveBlock)resolve
       reject:(RCTPromiseRejectBlock)reject
 {
+  // Installed before the sheet is presented, so Continue's OAuth session
+  // uses the foreground window instead of GravatarUI's scene-less UIWindow.
+  GravatarInstallOAuthAnchorFix();
   __weak __typeof(self) weakSelf = self;
   dispatch_async(dispatch_get_main_queue(), ^{
     UIViewController *controller = RCTPresentedViewController();

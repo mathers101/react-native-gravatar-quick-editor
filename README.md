@@ -19,9 +19,27 @@ Editing a profile uses OAuth. In the [Gravatar developer dashboard](https://grav
 1. Create an application and copy the client id.
 2. Register an **https** redirect URL. The Android and iOS SDKs use the implicit flow (`response_type=token`), and the server accepts only `https` URLs.
 
-That redirect URL has to open your installed app after login. Android does this with an [App Link](https://developer.android.com/training/app-links), and iOS does it with an associated domain (a universal link). Host `assetlinks.json` for the Android host and an Apple App Site Association file for the iOS domain.
+That redirect URL has to open your installed app after login. Android does this with an [App Link](https://developer.android.com/training/app-links). iOS does it with associated domains. Host `assetlinks.json` for the Android host, and an Apple App Site Association file for the iOS domain. The association file has to list the app under both `applinks` and `webcredentials`:
 
-Pass the same client id and redirect URL into `openQuickEditor`. During `npx expo prebuild`, the config plugin registers that redirect URL with the native app: it adds the Android OAuth activity and the Maven repositories the Android SDK is published from, and it adds the iOS associated domain.
+```json
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["TEAMID.bundle.identifier"],
+        "components": [{ "/": "/redirect-url" }]
+      }
+    ]
+  },
+  "webcredentials": {
+    "apps": ["TEAMID.bundle.identifier"]
+  }
+}
+```
+
+`webcredentials` is required. On iOS 17.4 and later the Quick Editor opens the consent page with `ASWebAuthenticationSession` and an HTTPS callback. iOS checks the `webcredentials` association before it will show that page. An `applinks` entry alone leaves Continue on the intro sheet: a spinner appears, then the same "Edit your Profile" drawer.
+
+Pass the same client id and redirect URL into `openQuickEditor`. During `npx expo prebuild`, the config plugin registers that redirect URL with the native app: it adds the Android OAuth activity and the Maven repositories the Android SDK is published from, and it adds the iOS `applinks` and `webcredentials` domains.
 
 ## Expo
 
@@ -72,7 +90,7 @@ npx expo prebuild
 
 Prebuild is what applies the plugin. The redirect host and path are written into `AndroidManifest.xml` and the iOS entitlements at that moment. Run `npx expo prebuild` again whenever `EXPO_PUBLIC_GRAVATAR_REDIRECT_URI` changes, then rebuild the native app. The client id is read from JavaScript, so a new `EXPO_PUBLIC_GRAVATAR_CLIENT_ID` is picked up with the next bundle.
 
-On iOS, forward the returning universal link to the Gravatar SDK. The plugin adds the associated domain; the callback itself belongs in the app. In the generated `SceneDelegate` (or in `application(_:continue:restorationHandler:)`, when that is the method that already receives the link):
+On iOS, forward a returning universal link to the Gravatar SDK when the app receives it. The HTTPS auth session captures the redirect itself when `webcredentials` is set up. This forward is the fallback for when iOS delivers the link to the app instead. In the generated `SceneDelegate` (or in `application(_:continue:restorationHandler:)`, when that is the method that already receives the link):
 
 ```swift
 import GravatarUI
@@ -124,7 +142,7 @@ Android is the same path. Add the config plugin, point `redirectUri` at the regi
 
 `EXPO_PUBLIC_` variables are an Expo convention. A bare app can pass the client id and redirect URL into `openQuickEditor` from its own configuration. The redirect URL passed there has to be the one given to the plugin.
 
-On iOS, forward universal links to `OAuthSession.shared.handleCallback` with the `SceneDelegate` snippet above, and host an Apple App Site Association file for the domain. `GravatarUI` is a Swift pod. In the Podfile:
+On iOS, host the Apple App Site Association file shown above (`applinks` and `webcredentials`), and forward universal links to `OAuthSession.shared.handleCallback` with the `SceneDelegate` snippet. `GravatarUI` is a Swift pod. In the Podfile:
 
 ```ruby
 ENV['USE_FRAMEWORKS'] ||= 'static'

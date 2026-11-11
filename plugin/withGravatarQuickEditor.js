@@ -89,9 +89,15 @@ function withAssociatedDomain(config, host) {
     const current = Array.isArray(mod.modResults[key])
       ? mod.modResults[key]
       : [];
-    const entry = `applinks:${host}`;
-    if (!current.includes(entry)) {
-      current.push(entry);
+    // applinks opens the redirect in the app. webcredentials is what
+    // ASWebAuthenticationSession's HTTPS callback (iOS 17.4+) checks before
+    // it will present the consent page. applinks alone leaves Continue on
+    // the intro sheet.
+    for (const service of ['applinks', 'webcredentials']) {
+      const entry = `${service}:${host}`;
+      if (!current.includes(entry)) {
+        current.push(entry);
+      }
     }
     mod.modResults[key] = current;
     return mod;
